@@ -59,6 +59,8 @@ def quiz(request):
     if request.method == 'GET':
         t1 = time.time()
         difficulty = request.GET.get('diff')
+        print('***************')
+        print(request.GET.get('category'))
         category = condition.get(request.GET.get('category'), 0)
         request.session['t1'] = t1
         request.session['cat_id'] = category
