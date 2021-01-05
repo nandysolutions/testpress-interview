@@ -84,8 +84,8 @@ def question(request):
         question, correct, answers = '', '', ''
         i = request.session.get('counter')
         request.session['score'] = request.GET.get('score')
+        complete = False
         try:
-            complete = False
             question = questions[i]['question']
             answers = questions[i]['incorrect_answers'] + [questions[i]['correct_answer']]
             random.shuffle(answers)

@@ -26,9 +26,9 @@ SECRET_KEY = '!!o)-)s7ci)^+*0he()h1c3_g(3fcay912w+a8=g+2%y09t_5@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
-SECURE_SSL_REDIRECT = True  # [1]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
+# SECURE_SSL_REDIRECT = True  # [1]
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
