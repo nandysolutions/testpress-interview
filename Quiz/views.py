@@ -85,17 +85,17 @@ def question(request):
         i = request.session.get('counter')
         request.session['score'] = request.GET.get('score')
         complete = False
-        try:
-            question = questions[i]['question']
-            answers = questions[i]['incorrect_answers'] + [questions[i]['correct_answer']]
-            random.shuffle(answers)
-            correct = questions[i]['correct_answer']
-            request.session['counter'] += 1
-        except:
-            t2 = time.time()
-            timetaken = t2 - int(request.session.get('t1'))
-            request.session['time'] = timetaken
-            complete = True
+        # try:
+        question = questions[i]['question']
+        answers = questions[i]['incorrect_answers'] + [questions[i]['correct_answer']]
+        random.shuffle(answers)
+        correct = questions[i]['correct_answer']
+        request.session['counter'] += 1
+        # except:
+        t2 = time.time()
+        timetaken = t2 - int(request.session.get('t1'))
+        request.session['time'] = timetaken
+        # complete = True
         return HttpResponse(json.dumps({'question': question, 'id': i + 1, 'complete': complete,
                                         'correct': correct, 'answers': answers}),
                             content_type="application/json")
