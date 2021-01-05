@@ -130,4 +130,4 @@ def result(request):
     for cat in Category.objects.filter(user=User.objects.get(username=username)):
         quiz.category.add(cat)
     messages.success(request, 'Results Saved Successfully :)')
-    return render(request, 'result.html', {'final': score >= 5, 'timetaken': time})
+    return render(request, 'result.html', {'final': score >= 5, 'timetaken': time, 'score': score})
