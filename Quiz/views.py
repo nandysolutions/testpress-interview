@@ -54,7 +54,6 @@ questions = []
 
 @csrf_exempt
 def quiz(request):
-    global questions
     i = 0
     condition = {'gk': 9, 'cs': 18}
     if request.method == 'GET':
@@ -71,7 +70,7 @@ def quiz(request):
                                     'category': category}, verify=False).json()
         answers = data['results'][0]['incorrect_answers'] + [data['results'][0]['correct_answer']]
         random.shuffle(answers)
-        questions = data['results'][1:]
+        request.session['questions'] = data['results'][1:]
         request.session['counter'] = i
         return render(request, 'quiz.html',
                       context={'question': data['results'][0]['question'],
@@ -79,23 +78,23 @@ def quiz(request):
 
 
 def question(request):
-    global questions
     if request.is_ajax():
         question, correct, answers = '', '', ''
+        questions = request.session.get('questions')
         i = request.session.get('counter')
         request.session['score'] = request.GET.get('score')
         complete = False
-        # try:
-        question = questions[i]['question']
-        answers = questions[i]['incorrect_answers'] + [questions[i]['correct_answer']]
-        random.shuffle(answers)
-        correct = questions[i]['correct_answer']
-        request.session['counter'] += 1
-        # except:
-        t2 = time.time()
-        timetaken = t2 - int(request.session.get('t1'))
-        request.session['time'] = timetaken
-        # complete = True
+        try:
+            question = questions[i]['question']
+            answers = questions[i]['incorrect_answers'] + [questions[i]['correct_answer']]
+            random.shuffle(answers)
+            correct = questions[i]['correct_answer']
+            request.session['counter'] += 1
+        except:
+            t2 = time.time()
+            timetaken = t2 - int(request.session.get('t1'))
+            request.session['time'] = timetaken
+            complete = True
         return HttpResponse(json.dumps({'question': question, 'id': i + 1, 'complete': complete,
                                         'correct': correct, 'answers': answers}),
                             content_type="application/json")
@@ -131,4 +130,4 @@ def result(request):
     for cat in Category.objects.filter(user=User.objects.get(username=username)):
         quiz.category.add(cat)
     messages.success(request, 'Results Saved Successfully :)')
-    return render(request, 'result.html', {'final': score >= 5, 'timetaken': request.session.get('time')})
+    return render(request, 'result.html', {'final': score >= 5, 'timetaken': time})
