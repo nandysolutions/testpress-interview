@@ -70,6 +70,7 @@ def quiz(request):
         data = requests.get(endpoint,
                             params={'amount': 10, 'type': 'multiple', 'difficulty': difficulty,
                                     'category': category}, verify=False).json()
+        print(data)
         answers = data['results'][0]['incorrect_answers'] + [data['results'][0]['correct_answer']]
         random.shuffle(answers)
         request.session['questions'] = data['results'][1:]
