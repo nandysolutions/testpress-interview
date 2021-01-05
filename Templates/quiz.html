@@ -78,6 +78,7 @@
                 data: {'score': score},
                 success: function (res) {
                     setTimeout(function () {
+                        alert(res.complete)
                         if (!res.complete) {
                             let ele = document.getElementById('question' + res.id)
                             let btns = document.getElementsByClassName('btn')

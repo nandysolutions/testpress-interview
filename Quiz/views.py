@@ -109,22 +109,22 @@ def result(request):
     cat_name = request.session.get('cat_name')
     diff = request.session.get('diff')
     time = request.session.get('time')
-    categ = Category.objects.get(id=Category.objects.last().id, category_id=cat_id, category_name=cat_name,
-                                 user=User.objects.get(username=username),
-                                 category_diff=diff_condition.get(diff))
-    if not categ:
-        category = Category()
-        category.category_id = cat_id
-        category.category_name = cat_name
-        category.user = User.objects.get(username=username)
-        category.score = score
-        category.time_taken = time
-        category.category_diff = diff_condition.get(diff)
-        category.save()
-    else:
-        categ.time_taken = time
-        categ.score = score
-        categ.save()
+    # categ = Category.objects.get(id=Category.objects.last().id, category_id=cat_id, category_name=cat_name,
+    #                              user=User.objects.get(username=username),
+    #                              category_diff=diff_condition.get(diff))
+    # if not categ:
+    category = Category()
+    category.category_id = cat_id
+    category.category_name = cat_name
+    category.user = User.objects.get(username=username)
+    category.score = score
+    category.time_taken = time
+    category.category_diff = diff_condition.get(diff)
+    category.save()
+    # else:
+    #     categ.time_taken = time
+    #     categ.score = score
+    #     categ.save()
     quiz = Quiz()
     quiz.user = User.objects.get(username=username)
     quiz.save()
