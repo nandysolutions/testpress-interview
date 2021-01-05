@@ -55,7 +55,7 @@ questions = []
 @csrf_exempt
 def quiz(request):
     i = 0
-    condition = {'gk': 9, 'cs': 18}
+    condition = {'gk': 9, 'cs': 18, 'maths': 19, 'sports': 21, 'music': 12, 'film': 11, 'books': 10}
     if request.method == 'GET':
         t1 = time.time()
         difficulty = request.GET.get('diff')

@@ -114,12 +114,17 @@
         <form id="quizform" style="margin-left: 27%" class="text-left" action="{% url 'quiz' %}"
               method="get">
             <div class="form-group row w-50">
-                <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                <label for="inputCategory" class="col-sm-2 col-form-label d-block">Category</label>
                 <div class="col-sm-10">
                     <select id="inputCategory" class="form-control" name="category">
                         <option value="null" selected>Choose...</option>
                         <option value="gk">General Knowledge</option>
-                        <option value="cs">Science-Computers</option>
+                        <option value="cs">Science: Computers</option>
+                        <option value="maths">Science: Mathematics</option>
+                        <option value="sports">Sports</option>
+                        <option value="music">Entertainment: Music</option>
+                        <option value="film">Entertainment: Film</option>
+                        <option value="books">Entertainment: Books</option>
                     </select>
                 </div>
             </div>
