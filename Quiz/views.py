@@ -81,7 +81,8 @@ def quiz(request):
 
 
 def question(request):
-    if request.is_ajax():
+    is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+    if is_ajax:
         question, correct, answers = '', '', ''
         questions = request.session.get('questions')
         i = request.session.get('counter')
